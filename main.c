@@ -19,22 +19,52 @@ void readTables()
   fclose(inputs);
 }
 
-void createTable(char *tableName, char *columns)
+void createTable(char *tableName, char *columns, int qntLines)
 {
   int flag = 0;
-
-  FILE *table;
-  char path[100];
-  strcpy(path, "./tables/");
-  strcat(path, tableName);
-  strcat(path, ".txt");
-  table = fopen(path, "wb");
-  if (table == NULL)
+  FILE *tables = fopen("./heading/tables.txt", "r");
+  if (tables == NULL)
   {
     printf("Error opening file!\n");
     return;
   }
-  fclose(table);
+  char message[100];
+
+  for (int i = 0; i < qntLines; i++)
+  {
+    fscanf(tables,"%s", message);
+    if(strcmp(tableName, message) == 0){
+      flag = 1;
+      printf("Tabela já existe!\n");
+      break;
+    }
+  }
+  fclose(tables);
+
+
+  if(flag == 0){
+    FILE *inputs;
+    inputs = fopen("./heading/tables.txt", "a");
+    if (inputs == NULL)
+    {
+      printf("Error opening file!\n");
+      return;
+    }
+    fprintf(inputs, "%s\n", tableName);
+    fclose(inputs);
+
+    char path[100] = "./tables/";
+    strcat(path, tableName);
+    strcat(path, ".txt");
+    FILE *table = fopen(path, "w");
+    if (table == NULL)
+    {
+      printf("Error opening file!\n");
+      return;
+    }
+    fprintf(table, "%s\n", columns);
+    fclose(table);
+  }
 }
 
 int countLines(char *filename) {
@@ -67,23 +97,25 @@ int main(int argc, char *argv[])
   }
   
   char message[100];
+  scanf("%s", message);
 
-  while (1)
-  {
-    scanf("%s", message);
-    if (strcmp(message, "-1") == 0)
-    {
-      break;
-    }
-    fprintf(heading, "%s\n", message);
-  }
+
+  // while (1)
+  // {
+  //   scanf("%s", message);
+  //   if (strcmp(message, "-1") == 0)
+  //   {
+  //     break;
+  //   }
+  //   fprintf(heading, "%s\n", message);
+  // }
 
   
   fclose(heading);
+  readTables();
   int lines = countLines("./heading/tables.txt");
   printf("\nQuantidade de linhas: %d\n", lines);
-
-  readTables();
+  createTable("teste", "nome, idade", lines);
 
   return 0;
 }
