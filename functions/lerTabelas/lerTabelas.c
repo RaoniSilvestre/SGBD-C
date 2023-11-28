@@ -13,9 +13,11 @@ void lerTabelas()
     printf("Error opening file! ERRO EM LER TABELAS\n");
     return;
   }
+  int contador = 0;
   while (fgets(message, 100, inputs) != NULL)
-  {
-    printf("%s", message);
+  { 
+    printf("------\n");
+    printf("%d - %s", ++contador,message);
   }
   fclose(inputs);
 }
