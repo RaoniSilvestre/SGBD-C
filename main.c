@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
 #include "./utils/createTable/createTable.h"
 #include "./utils/countLines/countLines.h"
+#include "./utils/openMenu/openMenu.h"
+
 #include "./functions/criarNovaTabela/criarNovaTabela.h"
 #include "./functions/lerTabelas/lerTabelas.h"
-
 
 
 int main(int argc, char *argv[])
@@ -16,23 +18,13 @@ int main(int argc, char *argv[])
   int choice;
   while (1)
   {
-    printf("---------------------------\n");
-    printf("\nSGBD em C\n\n");
-    printf("1. Criar tabela\n");
-    printf("2. Listar tabelas\n");
-    printf("3. Inserir dados\n");
-    printf("4. Listar todos os dados de uma tabela\n");
-    printf("5. Apagar registro\n");
-    printf("6. Apagar tabela\n");
-    printf("7. Sair\n\n");
-    printf("---------------------------\n");
-    printf("Escolha: ");
+    openMenu();
     scanf("%d", &choice);
     printf("\n");
 
     switch (choice)
     {
-      
+
     case 1:
       //Acesse a função criarNovaTabela() no arquivo functions/criarNovaTabela/criarNovaTabela.c
       //para entender o que está acontecendo aqui.
