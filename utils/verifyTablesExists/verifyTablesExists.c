@@ -3,13 +3,14 @@
 #include <string.h>
 #include "verifyTablesExists.h"
 
+#include "../countLines/countLines.h"
 // Função que verifica se a tabela já existe
 // Retorna 1 se a tabela já existe
 // Retorna 0 se a tabela não existe
 // Retorna 2 se houve algum erro ao abrir o arquivo
 
 
-int verifyTableExists(int *qntLines, char *tableName)
+int verifyTableExists(char *tableName)
 {
   FILE *tables = fopen("./heading/tables.txt", "r");
   if (tables == NULL)
@@ -19,17 +20,18 @@ int verifyTableExists(int *qntLines, char *tableName)
   }
   char message[30];
 
-  for (int i = 0; i < *qntLines; i++)
+  int lines = countLines("./heading/tables.txt");
+
+  for (int i = 0; i < lines; i++)
   {
     fscanf(tables, "%s", message);
     if (strcmp(tableName, message) == 0)
-    {
+    { // Se a tabela já existir, retorna 1
       return 1;
-      printf("Tabela já existe!\n");
       break;
     }
   }
-
+  // Se a tabela não existir, retorna 0
   return 0;
   fclose(tables);
 }
