@@ -1,0 +1,2 @@
+STRING,STRING,FLOAT
+Nome,cargo,salario
