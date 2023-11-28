@@ -3,52 +3,33 @@
 #include <string.h>
 #include "createTable.h"
 
-
-void createTable(char *tableName, char *colums, int *qntLines)
+void createTable(char *tableName, char *typeLine, char *nameLine)
 {
-  int flag = 0;
-  FILE *tables = fopen("./heading/tables.txt", "r");
-  if (tables == NULL)
+  FILE *inputs;
+  inputs = fopen("./heading/tables.txt", "w");
+  if (inputs == NULL)
   {
     printf("Error opening file!\n");
     return;
   }
-  char message[100];
+  fprintf(inputs, "%s\n", tableName);
+  fclose(inputs);
 
-  for (int i = 0; i < *qntLines; i++)
+  char path[100] = "./tables/";
+  strcat(path, tableName);
+  strcat(path, ".txt");
+  FILE *table = fopen(path, "w");
+  if (table == NULL)
   {
-    fscanf(tables,"%s", message);
-    if(strcmp(tableName, message) == 0){
-      flag = 1;
-      printf("Tabela já existe!\n");
-      break;
-    }
+    printf("Error opening file!\n");
+    return;
   }
-  fclose(tables);
-
-
-  if(flag == 0){
-    FILE *inputs;
-    inputs = fopen("./heading/tables.txt", "a");
-    if (inputs == NULL)
-    {
-      printf("Error opening file!\n");
-      return;
-    }
-    fprintf(inputs, "%s\n", tableName);
-    fclose(inputs);
-
-    char path[100] = "./tables/";
-    strcat(path, tableName);
-    strcat(path, ".txt");
-    FILE *table = fopen(path, "w");
-    if (table == NULL)
-    {
-      printf("Error opening file!\n");
-      return;
-    }
-    fprintf(table, "%s\n", colums);
-    fclose(table);
-    *qntLines++;
-  }
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF)
+    ;
+  fprintf(table, "%s\n", nameLine);
+  while ((c = getchar()) != '\n' && c != EOF)
+    ;
+  fprintf(table, "%s\n", typeLine);
+  fclose(table);
 }
