@@ -2,57 +2,18 @@
 #include <string.h>
 #include <stdlib.h>
 #include "./utils/createTable/createTable.h"
+#include "./utils/countLines/countLines.h"
+#include "./functions/criarNovaTabela/criarNovaTabela.h"
+#include "./functions/lerTabelas/lerTabelas.h"
 
-int verifyTableExists()
-{
-  return 0;
-}
 
-void readTables()
-{
-  char message[100];
-  FILE *inputs;
-  inputs = fopen("./heading/tables.txt", "rb");
-  if (inputs == NULL)
-  {
-    printf("Error opening file!\n");
-    return;
-  }
-  while (fgets(message, 100, inputs) != NULL)
-  {
-    printf("%s", message);
-  }
-  fclose(inputs);
-}
-
-int countLines(char *filename)
-{
-  FILE *file = fopen(filename, "r");
-  if (file == NULL)
-  {
-    printf("Error opening file!\n");
-    return -1;
-  }
-  int count = 0;
-  char ch;
-  while ((ch = fgetc(file)) != EOF)
-  {
-    if (ch == '\n')
-    {
-      count++;
-    }
-  }
-
-  fclose(file);
-
-  return count;
-}
 
 int main(int argc, char *argv[])
 {
-
+  // A main funcionará como um menu para acessar as funcionalidades do SGBD.
+  // Cada funcionalidade será um arquivo .c separado dentro da pasta functions(São funções principais) 
+  // e será chamado de acordo com a escolha do usuário
   int choice;
-  int lines = countLines("./heading/tables.txt");
   while (1)
   {
     printf("---------------------------\n");
@@ -71,83 +32,52 @@ int main(int argc, char *argv[])
 
     switch (choice)
     {
+      
     case 1:
-      printf("1. Selecionado.\n");
-      printf("Insira o nome da tabela: ");
-      char newTableName[50];
-      scanf("%s", newTableName);
-      FILE *heading;
-      heading = fopen("./heading/tables.txt", "a");
-      if (heading == NULL)
-      {
-        printf("Error opening file!\n");
-        return 1;
-      }
-      if (verifyTableExists(newTableName) == 1)
-      {
-        printf("Tabela já existe\n");
-        break;
-      }
-      else
-      {
-        printf("Quantidade de colunas: ");
-        int columns;
-        scanf("%d", &columns);
-        char columnName[columns][30];
-        char columnType[columns][30];
-
-        for (int i = 0; i < columns; i++)
-        {
-          printf("Nome da coluna: ");
-          char columnName[30];
-          scanf("%s", columnName);
-          printf("Tipo da coluna: ");
-          char columnType[30];
-          scanf("%s", columnType);
-        }
-        fprintf(heading, "%s\n", newTableName);
-        createTable(newTableName,"cavalo,caralho", &lines);
-      }
-
-      fclose(heading);
+      //Acesse a função criarNovaTabela() no arquivo functions/criarNovaTabela/criarNovaTabela.c
+      //para entender o que está acontecendo aqui.
+      criarNovaTabela();
       break;
+
+
     case 2:
-      printf("Listar tabelas\n");
+      //O mesmo é análogo para todos os outros casos. (Quando tiver terminado de fazer esse código)
+      printf("Tabelas disponíveis: \n");
+      lerTabelas();
       break;
+
+
     case 3:
       printf("Inserir dados\n");
       break;
+
+
     case 4:
       printf("Listar todos os dados de uma tabela\n");
       break;
+
+
     case 5:
       printf("Apagar registro\n");
       break;
+
+
     case 6:
       printf("Apagar tabela\n");
       break;
+
+
     case 7:
       printf("Sair\n");
-      return 0;
+      return 0; //Encerra o programa
       break;
+
+
     default:
-      printf("Opção inválida\n");
-      return 1;
+      printf("Opção inválida\n"); //Nada acontece, reinicia o loop
       break;
     }
   }
 
-  char message[100];
-  while (1)
-  {
-    scanf("%s", message);
-    if (strcmp(message, "-1") == 0)
-    {
-      break;
-    }
-    createTable(message, "nome,idade", &lines);
-  }
-
-  readTables();
   return 0;
 }
