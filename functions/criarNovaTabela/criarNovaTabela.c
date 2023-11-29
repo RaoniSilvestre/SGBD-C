@@ -11,7 +11,8 @@
 
 void criarNovaTabela()
 {
-  printf("1. Selecionado.\n"); // Grande parte dos printfs são para entendimento do usuário
+  system("clear");
+  printf("1. Criar nova tabela.\n"); // Grande parte dos printfs são para entendimento do usuário
   printf("Insira o nome da tabela: ");
 
   char newTableName[50]; // Variável que armazenará o nome da nova tabela
