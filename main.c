@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
   int choice;
   while (1)
   {
+    system("clear");
     openMenu();
     scanf("%d", &choice);
     printf("\n");
@@ -31,8 +32,8 @@ int main(int argc, char *argv[])
 
     case 2:
       // O mesmo é análogo para todos os outros casos. (Quando tiver terminado de fazer esse código)
-      printf("Tabelas disponíveis: \n");
       lerTabelas();
+      system("read -p \"\nPressione enter para sair\" saindo");
       break;
 
     case 3:
@@ -50,6 +51,7 @@ int main(int argc, char *argv[])
 
     case 6:
       printf("Apagar tabela\n");
+      apagarTabela();
       break;
 
     case 7:
@@ -57,7 +59,9 @@ int main(int argc, char *argv[])
       system("clear");
       break;
     case 8:
-      printf("Sair\n");
+      
+      system("read -p \"\nPressione enter para sair\" saindo");
+      system("clear");
       return 0; // Encerra o programa
       break;
 
