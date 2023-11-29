@@ -1,2 +1,6 @@
 STRING,FLOAT,STRING
 nome,salario,cargo
+Lara,4300,Dona-do-meu-core
+Raoni,2300,gaaroto-de-programa
+Meiry,20000,mae-de-lara
+Joao,alberto,fudeu
