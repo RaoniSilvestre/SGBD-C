@@ -1,0 +1,6 @@
+#ifndef INSERIR_DADOS_H
+#define INSERIR_DADOS_H
+
+
+
+#endif // INSERIR_DADOS_H
