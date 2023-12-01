@@ -18,16 +18,6 @@ void criarNovaTabela()
   char newTableName[50]; // Variável que armazenará o nome da nova tabela
   scanf("%s", newTableName);
 
-  // O arquivo heading serve para listar todas as tabelas existentes
-  FILE *heading;
-  heading = fopen("./heading/tables.txt", "a");
-
-  if (heading == NULL)
-  {
-    printf("Error opening file!\n"); // Verifica se o arquivo foi aberto corretamente
-    return;
-  }
-
   if (verifyTableExists(newTableName) == 1) // Verifica se a tabela já existe
   {
     printf("---------------------------\n");
@@ -100,5 +90,5 @@ void criarNovaTabela()
     createTable(newTableName, resultNameLine, resultTypeLine); // Chama a função createTable para criar a tabela (utils/createTable/createTable.c)
   }
 
-  fclose(heading);
+  
 }
