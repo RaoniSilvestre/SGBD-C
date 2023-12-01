@@ -41,7 +41,7 @@ void apagarTabela()
     fclose(heading);
 
     FILE *newHeading = fopen("./heading/tables.txt", "w");
-    
+
     for (int i = 0; i < lines; i++)
     {
       if (strcmp(tableName, message[i]) != 0)
@@ -51,10 +51,12 @@ void apagarTabela()
     }
 
     fclose(newHeading);
-    
-    printf("Tabela apagada com sucesso!\n");
+
+    printf("\nTabela apagada com sucesso!\n");
     system("read -p \"\nPressione enter para sair\" saindo");
-  } else{
+  }
+  else
+  {
     printf("\nErro: Tabela não existe!\n");
     system("read -p \"\nPressione enter para sair\" saindo");
   }
