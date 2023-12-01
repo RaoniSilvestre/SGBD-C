@@ -9,7 +9,8 @@
 
 void inserirDados()
 {
-  printf("3. Selecionado.\n");
+  system("clear");
+  printf("3. Inserir dados.\n");
   printf("Insira o nome da tabela: ");
 
   char tableName[50];
@@ -89,7 +90,8 @@ void inserirDados()
 
   else
   {
-    printf("Tabela não encontrada.\n");
+    printf("\nTabela não encontrada.\n");
+    system("sleep 2");
     return;
   }
 }
