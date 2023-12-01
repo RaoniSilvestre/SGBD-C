@@ -8,6 +8,8 @@
 #include "./functions/lerTabelas/lerTabelas.h"
 #include "./functions/inserirDados/inserirDados.h"
 #include "./functions/listarDados/listarDados.h"
+#include "./functions/apagarTabela/apagarTabela.h"
+#include "./functions/apagarRegistro/apagarRegistro.h"
 
 
 // A main funcionará como um menu para acessar as funcionalidades do SGBD.
