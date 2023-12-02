@@ -53,11 +53,10 @@ void apagarTabela()
     fclose(newHeading);
 
     printf("\nTabela apagada com sucesso!\n");
-    system("read -p \"\nPressione enter para sair\" saindo");
   }
   else
   {
     printf("\nErro: Tabela não existe!\n");
-    system("read -p \"\nPressione enter para sair\" saindo");
   }
+  system("read -p \"\nPressione enter para sair\" saindo");
 }
