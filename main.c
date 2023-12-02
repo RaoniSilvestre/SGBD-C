@@ -4,7 +4,6 @@
 #include <sys/stat.h>
 
 #include "./utils/openMenu/openMenu.h"
-#include "./utils/criarTables/criarTables.h"
 
 #include "./functions/criarNovaTabela/criarNovaTabela.h"
 #include "./functions/lerTabelas/lerTabelas.h"

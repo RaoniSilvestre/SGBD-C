@@ -10,11 +10,11 @@
 
 void apagarTabela()
 {
-
-  printf("Tabelas disponíveis: \n");
+  system("clear");
+  printf("6. Apagar tabela\n\n");
   lerTabelas();
 
-  printf("\nSelecione a tabela que deseja apagar: \n");
+  printf("\nDigite o nome da tabela que deseja apagar: \n");
 
   char tableName[30];
   scanf("%s", tableName);
