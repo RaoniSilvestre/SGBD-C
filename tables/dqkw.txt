@@ -1,0 +1,2 @@
+INT,INT,INT
+Adkas                         ,dkas                          ,dkas                          

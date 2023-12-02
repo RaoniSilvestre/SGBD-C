@@ -1,0 +1,2 @@
+STRING,INT,INT
+filiais,tamanho,numero
