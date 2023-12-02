@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 #include "./utils/openMenu/openMenu.h"
 
@@ -17,6 +18,10 @@
 // e será chamado de acordo com a escolha do usuário
 int main(int argc, char *argv[])
 {
+
+  const char* nome_diretorio = "./tables";
+  struct stat st = {0}; // cria a pasta tables caso não tenha
+
   int choice;
   while (1)
   {
