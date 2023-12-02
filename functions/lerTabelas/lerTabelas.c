@@ -5,7 +5,6 @@
 
 void lerTabelas()
 {
-  system("clear");
   printf("Tabelas disponíveis: \n");
   char message[100];
   FILE *inputs;

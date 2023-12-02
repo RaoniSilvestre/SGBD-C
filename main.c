@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
 
     case 2:
       // O mesmo é análogo para todos os outros casos. (Quando tiver terminado de fazer esse código)
+      system("clear");
       lerTabelas();
       system("read -p \"\nPressione enter para sair\" saindo");
       break;
@@ -47,10 +48,12 @@ int main(int argc, char *argv[])
 
     case 4:
       printf("Listar todos os dados de uma tabela\n");
+      listarDados();
       break;
 
     case 5:
       printf("Apagar registro\n");
+      apagarRegistro();
       break;
 
     case 6:

@@ -6,12 +6,14 @@
 
 #include "../../utils/verifyTablesExists/verifyTablesExists.h"
 #include "../../utils/countCommas/countCommas.h"
+#include "../../functions/lerTabelas/lerTabelas.h"
 
 void inserirDados()
 {
   system("clear");
-  printf("3. Inserir dados.\n");
-  printf("Insira o nome da tabela: ");
+  printf("3. Inserir dados.\n\n");
+  lerTabelas();
+  printf("\nInsira o nome da tabela: ");
 
   char tableName[50];
   scanf("%s", tableName);
