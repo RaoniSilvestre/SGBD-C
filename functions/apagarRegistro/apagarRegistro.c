@@ -9,6 +9,7 @@
 #define MAX_LINE_LEN 100
 
 void apagarRegistro(){
+    system("clear");
     FILE *file_list[MAX_FILES];
     char filenames[MAX_FILES][MAX_FILENAME_LEN];
     char input[MAX_LINE_LEN];
