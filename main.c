@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 
 #include "./utils/openMenu/openMenu.h"
+#include "./utils/criarTables/criarTables.h"
 
 #include "./functions/criarNovaTabela/criarNovaTabela.h"
 #include "./functions/lerTabelas/lerTabelas.h"
@@ -18,18 +19,7 @@
 // e será chamado de acordo com a escolha do usuário
 int main(int argc, char *argv[])
 {
-
-    const char* nome_diretorio = "./tables";
-    // Verifica se o diretório existe
-    struct stat st = {0};
-    if (stat(nome_diretorio, &st) == -1) {
-        // Se o diretório não existir, cria-o
-        if (mkdir(nome_diretorio, 0700) != 0) {
-            printf("Erro ao criar o diretório.\n");
-            return;
-        } 
-    }
-
+  criarTables();
   int choice;
   while (1)
   {

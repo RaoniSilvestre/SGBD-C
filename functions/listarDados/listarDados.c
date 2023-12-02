@@ -4,47 +4,46 @@
 #include <string.h>
 #include "listarDados.h"
 
-void listarArquivosTxt() {
-    DIR *dir;
-    struct dirent *ent;
-
-    dir = opendir("./tables");
-    if (dir != NULL) {
-        printf("Arquivos .txt encontrados:\n");
-        while ((ent = readdir(dir)) != NULL) {
-            if (strstr(ent->d_name, ".txt") != NULL) {
-                printf("%s\n", ent->d_name);
-            }
-        }
-        closedir(dir);
-    } else {
-        printf("Erro ao abrir o diretório.\n");
-    }
-}
-
-void listarConteudoArquivo(char *nomeArquivo) {
-    char path[100] = "./tables/";
-    strcat(path, nomeArquivo);
-
-    FILE *file = fopen(path, "r");
-    if (file != NULL) {
-        printf("Conteúdo do arquivo %s:\n", nomeArquivo);
-        char linha[1000];
-        while (fgets(linha, sizeof(linha), file) != NULL) {
-            printf("%s", linha);
-        }
-        fclose(file);
-    } else {
-        printf("Erro ao abrir o arquivo %s.\n", nomeArquivo);
-    }
-}
+#define MAX_FILES 100
+#define MAX_FILENAME_LEN 256
+#define MAX_LINE_LEN 100
 
 void listarDados() {
-    listarArquivosTxt();
+    FILE *file_list[MAX_FILES];
+    char filenames[MAX_FILES][MAX_FILENAME_LEN];
+    char input[MAX_LINE_LEN];
+    int file_count = 0;
 
-    char nomeArquivo[50];
-    printf("Digite o nome do arquivo que deseja listar os dados: ");
-    scanf("%s", nomeArquivo);
+    // Abre cada arquivo TXT na pasta ./tables
+    system("ls ./tables/*.txt > temp.txt");
+    FILE *file = fopen("temp.txt", "r");
+    while (fgets(input, MAX_LINE_LEN, file) != NULL) {
+        input[strcspn(input, "\n")] = 0; // Remove a quebra de linha
+        file_list[file_count] = fopen(input, "r");
+        strcpy(filenames[file_count], input);
+        file_count++;
+    }
+    fclose(file);
+    system("rm temp.txt");
 
-    listarConteudoArquivo(nomeArquivo);
+    // Mostra os arquivos disponíveis ao usuário
+    printf("Arquivos disponiveis para abertura:\n");
+    for (int i = 0; i < file_count; ++i) {
+        printf("%d - %s\n", i + 1, filenames[i]);
+    }
+
+    // Pergunta ao usuário qual arquivo abrir
+    int chosen_file;
+    printf("Digite o numero do arquivo que deseja abrir: ");
+    scanf("%d", &chosen_file);
+    chosen_file--; // Ajusta o índice para o array
+
+    // Lê e imprime todas as linhas do arquivo escolhido
+    printf("\nConteudo do arquivo %s:\n", filenames[chosen_file]);
+    char message[MAX_LINE_LEN];
+    int counter = 0;
+    while (fgets(message, MAX_LINE_LEN, file_list[chosen_file]) != NULL) {
+        printf("%d - %s", ++counter, message);
+    }
+    system("read -p \"\nPressione enter para sair\" saindo");
 }
