@@ -16,7 +16,11 @@ void criarNovaTabela()
   printf("Insira o nome da tabela: ");
 
   char newTableName[50]; // Variável que armazenará o nome da nova tabela
-  scanf("%s", newTableName);
+
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF) {}
+
+  scanf("%[^\n]", newTableName);
 
   if (verifyTableExists(newTableName) == 1) // Verifica se a tabela já existe
   {
@@ -59,14 +63,19 @@ void criarNovaTabela()
         printf("Coluna %d\n", i + 1);
 
         printf("Nome: ");
-        scanf("%s", columnName);
+        while ((c = getchar()) != '\n' && c != EOF) {}
+        scanf("%[^\n]", columnName);
+
 
         printf("Tipo: ");
-        scanf("%s", columnType);
+        while ((c = getchar()) != '\n' && c != EOF) {}
+        scanf("%[^\n]", columnType);
 
         if (validateType(columnType) == 0) // Verifica se o tipo inserido é válido
         {
-          printf("Nome inválido\n");
+          printf("\nNome inválido\n");
+
+          system("read -p \"\nPressione ENTER para retornar\" saindo");
           return;
         }
         else // Adiciona o nome e o tipo da coluna na variável result
@@ -75,7 +84,7 @@ void criarNovaTabela()
           strcat(resultTypeLine, columnType);
           break;
         }
-        /* code here */
+
       } while (1);
 
       if (i < columns - 1)
@@ -89,6 +98,4 @@ void criarNovaTabela()
     // Além disso, essa createTable se preocupa apenas em colocar os dados (caso sejam validados nessa função) no arquivo tables.txt
     createTable(newTableName, resultNameLine, resultTypeLine); // Chama a função createTable para criar a tabela (utils/createTable/createTable.c)
   }
-
-  
 }
