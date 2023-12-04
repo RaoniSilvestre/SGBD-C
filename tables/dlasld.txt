@@ -1,0 +1,2 @@
+INT,INT,INT
+dqlw,FKQOEF,FKOW
