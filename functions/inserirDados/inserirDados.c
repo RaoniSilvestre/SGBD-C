@@ -7,6 +7,7 @@
 #include "../../utils/verifyTablesExists/verifyTablesExists.h"
 #include "../../utils/countCommas/countCommas.h"
 #include "../../functions/lerTabelas/lerTabelas.h"
+#include "../../utils/countLines/countLines.h"
 
 void inserirDados()
 {
@@ -28,19 +29,18 @@ void inserirDados()
     FILE *table = fopen(tablePath, "r");
 
     char linha[150];
-    
+
     fgets(linha, sizeof(linha), table);
 
     int qntCampos = countCommas(linha) + 1;
 
     rewind(table);
 
-
     char tipos[qntCampos][30];
     char campos[qntCampos][30];
     memset(tipos, 0, sizeof(tipos));
     memset(campos, 0, sizeof(campos));
-    
+
     for (int j = 0; j < 2; j++)
     {
       for (int i = 0; i < qntCampos; i++)
@@ -55,9 +55,8 @@ void inserirDados()
           fscanf(table, "%[^,\n]", campos[i]);
           fseek(table, 1, SEEK_CUR);
         }
-      } 
+      }
     }
-
 
     fclose(table);
 
@@ -72,7 +71,16 @@ void inserirDados()
     for (int i = 0; i < qntCampos; i++)
     {
       printf("Insira o valor para o campo %s do tipo %s: ", campos[i], tipos[i]);
+
       scanf("%s", novoCampo);
+
+      while (i == 0 && verifyPK(novoCampo, tablePath) == 0)
+      {
+        printf("\nChave primária repetida, tente novamente...\n");
+        printf("Insira o valor para o campo %s do tipo %s: ", campos[i], tipos[i]);
+        scanf("%s", novoCampo);
+      }
+
       strcat(novoRegistro, novoCampo);
       if (i == qntCampos - 1)
       {
@@ -84,8 +92,8 @@ void inserirDados()
       }
     }
 
-    fprintf(table, "%s", novoRegistro);
-    fclose(table);
+    fprintf(table2, "%s", novoRegistro);
+    fclose(table2);
 
     return;
   }
@@ -96,4 +104,28 @@ void inserirDados()
     system("sleep 2");
     return;
   }
+}
+
+int verifyPK(char *newKey, char *tablePath)
+{
+  FILE *file = fopen(tablePath, "r");
+
+  int lines = countLines(tablePath);
+  char linha[200];
+  char pkLida[30];
+
+  for (int i = 0; i < lines; i++)
+  {
+    fgets(linha, 200, file);
+    strcpy(pkLida, strtok(linha, ","));
+
+    if (i > 2 && strcmp(pkLida, newKey) == 0)
+    {
+
+      return 0; // chave inválida
+    }
+  }
+
+  fclose(file);
+  return 1;
 }
