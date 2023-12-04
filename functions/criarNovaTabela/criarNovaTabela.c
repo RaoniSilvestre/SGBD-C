@@ -18,7 +18,9 @@ void criarNovaTabela()
   char newTableName[50]; // Variável que armazenará o nome da nova tabela
 
   int c;
-  while ((c = getchar()) != '\n' && c != EOF) {}
+  while ((c = getchar()) != '\n' && c != EOF)
+  {
+  }
 
   scanf("%[^\n]", newTableName);
 
@@ -59,17 +61,38 @@ void criarNovaTabela()
     {
       do
       {
-        printf("---------------------------\n");
-        printf("Coluna %d\n", i + 1);
+        if (i == 0)
+        {
+          printf("Essa coluna será a chave primária do tipo INT.\n");
+          printf("---------------------------\n");
+          printf("Coluna %d\n", i + 1);
 
-        printf("Nome: ");
-        while ((c = getchar()) != '\n' && c != EOF) {}
-        scanf("%[^\n]", columnName);
+          printf("Nome: ");
+          while ((c = getchar()) != '\n' && c != EOF)
+          {
+          }
+          scanf("%[^\n]", columnName);
 
+          strcpy(columnType, "INT");
+        }
+        else
+        {
+          printf("---------------------------\n");
+          printf("Coluna %d\n", i + 1);
 
-        printf("Tipo: ");
-        while ((c = getchar()) != '\n' && c != EOF) {}
-        scanf("%[^\n]", columnType);
+          printf("Nome: ");
+          while ((c = getchar()) != '\n' && c != EOF)
+          {
+          }
+          scanf("%[^\n]", columnName);
+
+          printf("Tipo: ");
+          while ((c = getchar()) != '\n' && c != EOF)
+          {
+          }
+
+          scanf("%[^\n]", columnType);
+        }
 
         if (validateType(columnType) == 0) // Verifica se o tipo inserido é válido
         {
@@ -81,7 +104,10 @@ void criarNovaTabela()
         else // Adiciona o nome e o tipo da coluna na variável result
         {
           strcat(resultNameLine, columnName);
+          memset(resultNameLine, 0, sizeof(resultNameLine));
+
           strcat(resultTypeLine, columnType);
+          memset(resultTypeLine, 0, sizeof(resultTypeLine));
           break;
         }
 
