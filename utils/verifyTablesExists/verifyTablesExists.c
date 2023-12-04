@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "verifyTablesExists.h"
-
-#include "../countLines/countLines.h"
 // Função que verifica se a tabela já existe
 // Retorna 1 se a tabela já existe
 // Retorna 0 se a tabela não existe

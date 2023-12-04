@@ -1,9 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include "criarTables.h"
+#include "criarTablesDir.h"
 
-void criarTables() {
+void criarTablesDir() {
     const char* nome_diretorio = "./tables";
     // Verifica se o diretório existe
     struct stat st = {0};

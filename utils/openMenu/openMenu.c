@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "openMenu.h"
 
 // Criei para facilitar a visualização do menu e não poluir a main.c

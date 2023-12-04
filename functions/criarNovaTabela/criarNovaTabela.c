@@ -1,13 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "criarNovaTabela.h"
-
-#include "../../utils/createTable/createTable.h"
-#include "../../utils/countLines/countLines.h"
-#include "../../utils/validateType/validateType.h"
-#include "../../utils/verifyTablesExists/verifyTablesExists.h"
 
 void criarNovaTabela()
 {

@@ -7,7 +7,7 @@
 // e será chamado de acordo com a escolha do usuário
 int main(int argc, char *argv[])
 {
-  criarTables();
+  criarTablesDir();
   int choice;
   while (1)
   {

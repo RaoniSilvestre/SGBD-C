@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "countLines.h"
 
 // Função que conta a quantidade de linhas em um arquivo

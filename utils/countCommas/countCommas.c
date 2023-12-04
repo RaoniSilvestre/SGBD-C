@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-
 #include "countCommas.h"
 
 int countCommas(char *string)

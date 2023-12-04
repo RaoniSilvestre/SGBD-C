@@ -1,12 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "apagarRegistro.h"
 
-#define MAX_FILES 100
-#define MAX_FILENAME_LEN 256
-#define MAX_LINE_LEN 100
 
 void apagarRegistro(){
     system("clear");
@@ -75,5 +68,5 @@ void apagarRegistro(){
 
     printf("Linha removida com sucesso!\n");
 
-    return 0;
+    return;
 }
