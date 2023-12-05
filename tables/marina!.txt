@@ -1,6 +1,0 @@
-INT,STRING,INT
-id,nome,idade
-2,aaaaaaaa,19
-3,dlqw,4
-4,feif,5
-2,fewl,23

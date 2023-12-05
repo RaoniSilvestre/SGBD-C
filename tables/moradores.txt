@@ -1,0 +1,6 @@
+INT,STRING,FLOAT
+id,morador,salario
+1,Josias,3200
+1,opa,9211
+2,lara,4000
+23,agoraSi,3200
