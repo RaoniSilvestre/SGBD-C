@@ -1,72 +1,58 @@
 #include "apagarRegistro.h"
 
+void apagarRegistro()
+{
+  system("clear");
 
-void apagarRegistro(){
-    system("clear");
-    FILE *file_list[MAX_FILES];
-    char filenames[MAX_FILES][MAX_FILENAME_LEN];
-    char input[MAX_LINE_LEN];
-    int file_count = 0;
+  // Mostra os arquivos disponíveis ao usuário
+  lerTabelas();
 
-    // Abre cada arquivo TXT na pasta ./tables
-    system("ls ./tables/*.txt > temp.txt");
-    FILE *file = fopen("temp.txt", "r");
-    while (fgets(input, MAX_LINE_LEN, file) != NULL) {
-        input[strcspn(input, "\n")] = 0; // Remove a quebra de linha
-        file_list[file_count] = fopen(input, "r");
-        strcpy(filenames[file_count], input);
-        file_count++;
+  // Pergunta ao usuário qual arquivo abrir
+  char tableName[30];
+  printf("\nDigite o numero do arquivo que deseja abrir: ");
+  scanf("%s", tableName);
+
+  // Lê e imprime todas as linhas do arquivo escolhido
+
+  char tablePath[50] = "./tables/";
+  strcat(tablePath, tableName);
+  strcat(tablePath, ".txt");
+  imprimirTabela(tablePath);
+
+  // Pergunta qual linha o usuário deseja remover
+  int lineToRemove;
+  printf("\nDigite o numero da linha que deseja remover: ");
+  scanf("%d", &lineToRemove);
+  lineToRemove = lineToRemove + 2;
+  // Reabre o arquivo para leitura e escrita
+  FILE *file = fopen(tablePath, "r+");
+
+  // Cria um arquivo temporário para armazenar as linhas não removidas
+  FILE *temp_file = fopen("temp.txt", "w");
+
+  char line[256]; // Ajuste o tamanho conforme necessário
+  int currentLine = 0;
+
+  while (fgets(line, sizeof(line), file))
+  {
+    currentLine++;
+
+    // Se a linha atual não é a linha a ser removida, escreva no arquivo temporário
+    if (currentLine != lineToRemove)
+    {
+      fputs(line, temp_file);
     }
-    fclose(file);
-    system("rm temp.txt");
+  }
 
-    // Mostra os arquivos disponíveis ao usuário
-    printf("Arquivos disponiveis para abertura:\n");
-    for (int i = 0; i < file_count; ++i) {
-        printf("%d - %s\n", i + 1, filenames[i]);
-    }
+  // Feche os arquivos
+  fclose(file);
+  fclose(temp_file);
 
-    // Pergunta ao usuário qual arquivo abrir
-    int chosen_file;
-    printf("Digite o numero do arquivo que deseja abrir: ");
-    scanf("%d", &chosen_file);
-    chosen_file--; // Ajusta o índice para o array
+  // Agora, remova o arquivo original e renomeie o arquivo temporário
+  remove(tablePath);
+  rename("temp.txt", tablePath);
 
-    // Lê e imprime todas as linhas do arquivo escolhido
-    printf("\nConteudo do arquivo %s:\n", filenames[chosen_file]);
-    char message[MAX_LINE_LEN];
-    int counter = 0;
-    while (fgets(message, MAX_LINE_LEN, file_list[chosen_file]) != NULL) {
-        printf("%d - %s", ++counter, message);
-    }
+  printf("Linha removida com sucesso!\n");
 
-    // Pergunta qual linha o usuário deseja remover
-    int line_to_remove;
-    printf("\nDigite o numero da linha que deseja remover: ");
-    scanf("%d", &line_to_remove);
-
-    // Reabre o arquivo para leitura e escrita
-    fclose(file_list[chosen_file]);
-    file_list[chosen_file] = fopen(filenames[chosen_file], "r+");
-    
-    // Cria um arquivo temporário para armazenar as linhas não removidas
-    FILE *temp_file = fopen("temp.txt", "w");
-    rewind(file_list[chosen_file]); // Retorna ao início do arquivo
-    counter = 0;
-    while (fgets(message, MAX_LINE_LEN, file_list[chosen_file]) != NULL) {
-        counter++;
-        if (counter != line_to_remove) {
-            fputs(message, temp_file);
-        }
-    }
-    fclose(file_list[chosen_file]);
-    fclose(temp_file);
-
-    // Sobrescreve o arquivo original com o temporário
-    remove(filenames[chosen_file]);
-    rename("temp.txt", filenames[chosen_file]);
-
-    printf("Linha removida com sucesso!\n");
-
-    return;
+  return;
 }
