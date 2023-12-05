@@ -54,8 +54,8 @@ void criarNovaTabela()
       {
         if (i == 0)
         {
-          printf("Essa coluna será a chave primária do tipo INT.\n");
           printf("---------------------------\n");
+          printf("Essa coluna será a chave primária do tipo INT.\n");
           printf("Coluna %d\n", i + 1);
 
           printf("Nome: ");
@@ -95,10 +95,7 @@ void criarNovaTabela()
         else // Adiciona o nome e o tipo da coluna na variável result
         {
           strcat(resultNameLine, columnName);
-          memset(resultNameLine, 0, sizeof(resultNameLine));
-
           strcat(resultTypeLine, columnType);
-          memset(resultTypeLine, 0, sizeof(resultTypeLine));
           break;
         }
 
