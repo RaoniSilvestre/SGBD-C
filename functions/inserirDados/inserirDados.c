@@ -110,9 +110,8 @@ int verifyPK(char *newKey, char *tablePath)
     fgets(linha, 200, file);
     strcpy(pkLida, strtok(linha, ","));
 
-    if (i > 2 && strcmp(pkLida, newKey) == 0)
+    if (i > 1 && strcmp(pkLida, newKey) == 0)
     {
-
       return 0; // chave inválida
     }
   }
