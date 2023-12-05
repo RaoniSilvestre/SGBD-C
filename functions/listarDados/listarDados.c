@@ -1,71 +1,56 @@
 #include "listarDados.h"
 
-
 void listarDados()
 {
-    system("clear");
-    FILE *file_list[MAX_FILES];
-    char filenames[MAX_FILES][MAX_FILENAME_LEN];
-    char input[MAX_LINE_LEN];
-    int file_count = 0;
+  system("clear");
+  char filenames[30];
+  // Mostra os arquivos disponíveis ao usuário
+  lerTabelas();
 
-    // Abre cada arquivo TXT na pasta ./tables
-    system("ls ./tables/*.txt > temp.txt");
-    FILE *file = fopen("temp.txt", "r");
-    while (fgets(input, MAX_LINE_LEN, file) != NULL)
+  // Pergunta ao usuário qual arquivo abrir pelo nome
+  char tableName[MAX_FILENAME_LEN];
+
+  printf("\nDigite o nome do arquivo que deseja abrir: ");
+  scanf("%s", tableName);
+
+  if (verifyTableExists(tableName) == 0)
+  {
+    printf("A tabela %s não existe.\n", tableName);
+    system("read -p \"Pressione enter para sair\" saindo");
+    return;
+  }
+  else
+  {
+    char tablePath[50] = "./tables/";
+    strcat(tablePath, tableName);
+    strcat(tablePath, ".txt");
+
+    char linha[200];
+    char formatar[40];
+    int qtdLinhas = countLines(tablePath);
+    int qtdColunas = countCommas(tablePath);
+
+    FILE *table = fopen(tablePath, "r");
+    printf("\n");
+    for (int i = 0; i < qtdLinhas; i++)
     {
-        input[strcspn(input, "\n")] = 0; // Remove a quebra de linha
-        file_list[file_count] = fopen(input, "r");
-        strcpy(filenames[file_count], input);
-        file_count++;
-    }
-    fclose(file);
-    system("rm temp.txt");
+      fgets(linha, 200, table);
 
-    // Mostra os arquivos disponíveis ao usuário
-    lerTabelas();
+      strcpy(formatar, strtok(linha, ","));
+      printf("%10s |", formatar);
+      for (int j = 0; j < qtdColunas+1; j++)
+      {
+        strcpy(formatar, strtok(NULL, ","));
+        printf("%10s |", formatar);
 
-    // Pergunta ao usuário qual arquivo abrir pelo nome
-    char chosen_filename[MAX_FILENAME_LEN];
-    printf("Digite o nome do arquivo que deseja abrir: ");
-    scanf("%s", chosen_filename);
-
-    int chosen_file = -1;
-    for (int i = 0; i < file_count; ++i)
-    {
-        // Verifica se o nome digitado corresponde a um dos arquivos disponíveis
-        char *filename = strrchr(filenames[i], '/');
-        char *dot_txt = strstr(filenames[i], ".txt");
-        if (filename != NULL && dot_txt != NULL && dot_txt == filename + strlen(filename) - 4)
-        {
-            *dot_txt = '\0'; // Remove a extensão .txt
-        }
-        if (filename != NULL && strcmp(filename + 1, chosen_filename) == 0)
-        {
-            chosen_file = i;
-            break;
-        }
-        else if (strcmp(filenames[i], chosen_filename) == 0)
-        {
-            chosen_file = i;
-            break;
-        }
+      }
+      strcpy(formatar, strtok(NULL, ","));
+      printf("%10s ", formatar);
+      printf("\n");
     }
 
-    if (chosen_file == -1)
-    {
-        printf("Arquivo '%s' não encontrado.\n", chosen_filename);
-        system("read -p \"\nPressione enter para sair\" saindo");
-        return;
-    }
-
-    // Lê e imprime todas as linhas do arquivo escolhido
-    printf("\nConteudo do arquivo %s:\n", chosen_filename);
-    char message[MAX_LINE_LEN];
-    int counter = 0;
-    while (fgets(message, MAX_LINE_LEN, file_list[chosen_file]) != NULL)
-    {
-        printf("%d - %s", ++counter, message);
-    }
-    system("read -p \"\nPressione enter para sair\" saindo");
+    printf("\n");
+    system("read -p \"\nPressione ENTER para retornar\" saindo");
+    fclose(table);
+  }
 }

@@ -6,6 +6,8 @@
 #include <dirent.h>
 #include <string.h>
 #include "../../functions/lerTabelas/lerTabelas.h"
+#include "../../utils/countLines/countLines.h"
+#include "../../utils/countCommas/countCommas.h"
 #define MAX_FILES 100
 #define MAX_FILENAME_LEN 256
 #define MAX_LINE_LEN 100
