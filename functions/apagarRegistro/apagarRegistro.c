@@ -9,7 +9,7 @@ void apagarRegistro()
 
   // Pergunta ao usuário qual arquivo abrir
   char tableName[30];
-  printf("\nDigite o numero do arquivo que deseja abrir: ");
+  printf("\nDigite o NOME do arquivo que deseja abrir: ");
   scanf("%s", tableName);
 
   // Lê e imprime todas as linhas do arquivo escolhido
@@ -19,24 +19,34 @@ void apagarRegistro()
   strcat(tablePath, ".txt");
   imprimirTabela(tablePath);
 
+  int lineCount = countLines(tablePath);
+  printf("\nNumero de linhas: %d\n", lineCount);
   // Pergunta qual linha o usuário deseja remover
   int lineToRemove;
-  printf("\nDigite o numero da linha que deseja remover: ");
-  scanf("%d", &lineToRemove);
-  lineToRemove = lineToRemove + 2;
+  do
+  {
+    printf("\nDigite o numero da linha que deseja remover: ");
+    scanf("%d", &lineToRemove);
+    lineToRemove = lineToRemove + 2;
+
+    if (lineToRemove <= 2 || lineToRemove > lineCount)
+    {
+      printf("Linha invalida!\n");
+    }
+  } while (lineToRemove <= 2 || lineToRemove > lineCount);
+
   // Reabre o arquivo para leitura e escrita
   FILE *file = fopen(tablePath, "r+");
 
   // Cria um arquivo temporário para armazenar as linhas não removidas
   FILE *temp_file = fopen("temp.txt", "w");
 
-  char line[256]; // Ajuste o tamanho conforme necessário
+  char line[256];
   int currentLine = 0;
 
   while (fgets(line, sizeof(line), file))
   {
     currentLine++;
-
     // Se a linha atual não é a linha a ser removida, escreva no arquivo temporário
     if (currentLine != lineToRemove)
     {
