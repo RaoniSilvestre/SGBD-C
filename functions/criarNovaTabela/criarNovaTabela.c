@@ -87,7 +87,7 @@ void criarNovaTabela()
 
         if (validateType(columnType) == 0) // Verifica se o tipo inserido é válido
         {
-          printf("\nNome inválido\n");
+          printf("\nTipo inválido\n");
 
           system("read -p \"\nPressione ENTER para retornar\" saindo");
           return;
