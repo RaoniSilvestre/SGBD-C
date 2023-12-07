@@ -76,7 +76,7 @@ void imprimirTabela(char *tablePath)
   fclose(table);
 }
 
-  void searchByChave(char *tablePath) {
+void searchByChave(char *tablePath) {
     char linha[200];
     char formatar[40];
     int qtdLinhas = countLines(tablePath);
@@ -110,12 +110,9 @@ void imprimirTabela(char *tablePath)
         if (!linhaEncontrada) {
             printf("Chave '%d' não encontrada.\n", chave);
         }
-        printf("\n");
-
-        fclose(table);
     } 
 
-    else if (pesquisa == 2) {
+  else if (pesquisa == 2) {
 
     imprimirSegundaLinha(tablePath);
 
@@ -129,11 +126,8 @@ void imprimirTabela(char *tablePath)
                     printf("\n");
                 }
             }
-        }
-        printf("\n");
-
-        fclose(table);
     }
+  }
 
  else if (pesquisa==3) {
 
@@ -148,13 +142,13 @@ void imprimirTabela(char *tablePath)
                 }
             }
         }
-        printf("\n");
-
-        fclose(table);
     }
-  }
+    printf("\n");
 
-  void imprimirSegundaLinha(char *tablePath) {
+    close(table);
+}
+
+void imprimirSegundaLinha(char *tablePath) {
     FILE *file = fopen(tablePath, "r");
     if (file == NULL) {
         printf("Erro ao abrir o arquivo.\n");
