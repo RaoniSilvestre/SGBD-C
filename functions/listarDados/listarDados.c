@@ -37,39 +37,22 @@ void listarDados()
 
 void imprimirTabela(char *tablePath)
 {
-  char linha[200];
-  char formatar[40];
-  int qtdLinhas = countLines(tablePath);
-  int qtdColunas = countCommas(tablePath);
-
-  FILE *table = fopen(tablePath, "r");
-  printf("\n");
-  for (int i = 0; i < qtdLinhas; i++)
-  {
-    fgets(linha, 200, table);
-    if (i == 1)
-    {
-      printf("%10s |", "Linha");
+    char linha[200];
+    char formatar[40];
+    int qtdLinhas = countLines(tablePath);
+    int qtdColunas = countCommas(tablePath);
+    system("clear");
+    FILE *table = fopen(tablePath, "r");
+    for (int i = 0; i < qtdLinhas; i++) {
+            fgets(linha, 200, table);
+            if (i >= 1) {
+                int currentChave;
+                sscanf(linha, "%d", &currentChave);
+                    printTokens(linha);
+                    printf("\n");
+            }
     }
-
-    if (i > 1)
-    {
-      printf("%10d |", i - 1);
-    }
-    if (i >= 1)
-    {
-      strcpy(formatar, strtok(linha, ","));
-      printf("%10s |", formatar);
-      for (int j = 0; j < qtdColunas + 1; j++)
-      {
-        strcpy(formatar, strtok(NULL, ","));
-        printf("%10s |", formatar);
-      }
-      strcpy(formatar, strtok(NULL, ","));
-      printf("%10s ", formatar);
-      printf("\n");
-    }
-  }
+  
 
   printf("\n");
   

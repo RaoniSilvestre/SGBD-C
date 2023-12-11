@@ -1,1 +1,3 @@
-## descrição do projeto
+## Descrição do Projeto
+Este projeto está organizado principalmente em três pastas: utils, functions e tables. Além disso, há a pasta reading, que contém um arquivo txt. Esse arquivo armazena o nome de todas as tabelas existentes no projeto.
+A execução do programa começa no arquivo main.c, que inicializa um script dentro da pasta utils. Esse script exibe as opções iniciais para o usuário, representando as funções disponíveis no programa. Quando o usuário seleciona uma opção, o main.c chama a função correspondente localizada na pasta functions. Em seguida, o script dentro de functions é executado, podendo utilizar ou não algum recurso do Utils. Após essa execução, o usuário é redirecionado de volta ao menu principal do main.c, permitindo que realize outra atividade.
