@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../../functions/listarDados/listarDados.h"
+#include "../../utils/verifyTablesExists/verifyTablesExists.h"
+
 
 #define MAX_FILES 100
 #define MAX_FILENAME_LEN 256
