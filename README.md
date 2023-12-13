@@ -51,7 +51,7 @@ A pasta `tables` é reservada para armazenar arquivos relacionados às tabelas d
 
 ## Como Executar
 
-1. Certifique-se de ter um ambiente C configurado.
+1. Certifique-se de ter um ambiente C com CMAKE configurado.
 2. Crie uma pasta chamada build para que o script funcione corretamente. 
 3. Compile o projeto usando o script criado na pasta `r`:
 
