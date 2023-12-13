@@ -42,14 +42,16 @@ void apagarRegistro()
     FILE *temp_file = fopen("./tables/temp.txt", "w");
 
     char line[256];
+    char lineCopy[256];
     char *field;
 
     while (fgets(line, sizeof(line), file))
     {
+      strcpy(lineCopy, line); 
       field = strtok(line, ",");
       if (strcmp(field, primaryKey) != 0)
       {
-        fputs(line, temp_file);
+        fputs(lineCopy, temp_file); 
       }
     }
 
