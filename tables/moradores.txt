@@ -1,5 +1,0 @@
-INT,STRING,FLOAT
-id,nome,salario
-1,Josias,3200
-23,agoraSi,3200
-12,Valdecir,9000

@@ -9,7 +9,7 @@ void openMenu()
   printf("1. Criar tabela\n");
   printf("2. Listar tabelas\n");
   printf("3. Inserir dados\n");
-  printf("4. Listar dados de uma tabela\n");
+  printf("4. Pesquisar dados\n");
   printf("5. Apagar registro\n");
   printf("6. Apagar tabela\n");
   printf("7. Limpar prompt\n");;

@@ -1,0 +1,3 @@
+INT,STRING,FLOAT
+codigo,produto,preço
+243,pão,4.20
