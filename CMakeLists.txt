@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
-project(MyProject)
+project(MyProject C)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_C_COMPILER "/usr/bin/gcc")  # Replace "/usr/bin/gcc" with your gcc path
+set(CMAKE_C_STANDARD 99)
 set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
 
 file(GLOB_RECURSE SOURCES "functions/*.c" "utils/*.c")
 
